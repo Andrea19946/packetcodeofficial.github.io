@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Convert date to Julian date and calculate difference</title>
+	<script type="text/javascript">
+		function toJulianDate(year, month, day) {
+			var a = Math.floor((14 - month) / 12);
+			var y = year + 4800 - a;
+			var m = month + 12 * a - 3;
+			var julianDay = day + Math.floor((153 * m + 2) / 5) + y * 365 + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+			return julianDay;
+		}
+
+		function calculateDifference() {
+			var year = parseInt(document.getElementById("year").value);
+			var month = parseInt(document.getElementById("month").value);
+			var day = parseInt(document.getElementById("day").value);
+			var julianDate = toJulianDate(year, month, day);
+			var firstDayOfYear = toJulianDate(year, 1, 1);
+			var difference = Math.abs(julianDate - firstDayOfYear);
+			document.getElementById("difference").innerHTML = difference;
+		}
+
+		function convertToJulianDate() {
+			var year = parseInt(document.getElementById("year").value);
+			var month = parseInt(document.getElementById("month").value);
+			var day = parseInt(document.getElementById("day").value);
+			var julianDate = toJulianDate(year, month, day);
+			document.getElementById("julianDate").innerHTML = julianDate;
+		}
+	</script>
+</head>
+<body>
+	<h1>Convertire in Giorni Giuliani</h1>
+	<p>Inserire una data:</p>
+	<form>
+		<input type="number" id="year" placeholder="Anno">
+		<input type="number" id="month" placeholder="Mese">
+		<input type="number" id="day" placeholder="Giorno">
+		<button type="button" onclick="convertToJulianDate()">Converti la data in Giorni Giuliani</button>
+		<p>Giorno Giuliano: <span id="julianDate"></span></p>
+		<button type="button" onclick="calculateDifference()">Calcola numero giorno</button>
+	</form>
+	<p>Giorno numero: <span id="difference"></span></p>
+	
+	<img src = "https://www.pngmart.com/files/4/Clown-PNG-Free-Download.png">
+</body>
+</html>
